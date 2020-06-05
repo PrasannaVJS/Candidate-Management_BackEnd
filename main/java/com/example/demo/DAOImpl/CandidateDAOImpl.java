@@ -14,6 +14,7 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 	public List<Candidate2> getAllCandidates(){
+		try {
 		return jdbcTemplate.query(
 				"select * from candidate2",
 				(rs,rowNum) ->
@@ -33,10 +34,16 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
 							rs.getBoolean("spring")
 						)
 				);
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public List<Candidate2> getCandidateByLocation(String location_choice)
 	{
+		try {
 		 return jdbcTemplate.query(
 	                "select * from candidate2 where location=?",new Object[]{location_choice},
 	                (rs, rowNum) ->
@@ -56,9 +63,15 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
 	    							rs.getBoolean("spring")                   
 	                        )
 	        );
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public List<Candidate2> getCandidateByJob(String jobdescrip){
+		try {
 		return jdbcTemplate.query(
                 "select * from candidate2 where jobdescrip=?",new Object[]{jobdescrip},
                 (rs, rowNum) ->
@@ -78,7 +91,38 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
     							rs.getBoolean("spring")                   
                         )
         );
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
-	
+	public List<Candidate2> getCandidateBySkill(String sname){
+		try {
+		return jdbcTemplate.query(
+                "select * from candidate2 where "+sname+ "=?",new Object[]{true},
+                (rs, rowNum) ->
+                        new Candidate2(
+                        		rs.getInt("id"),
+    							rs.getString("firstname"),
+    							rs.getString("lastname"),
+    							rs.getString("emailID"),
+    							rs.getString("location"),
+    							rs.getString("feedback"),
+    							rs.getString("jobdescrip"),
+    							rs.getLong("contactno"),
+    							rs.getBoolean("cpp"),
+    							rs.getBoolean("java"),
+    							rs.getBoolean("python"),
+    							rs.getBoolean("angular"),
+    							rs.getBoolean("spring")                   
+                        )
+        );
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
 }
