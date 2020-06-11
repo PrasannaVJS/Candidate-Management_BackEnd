@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.Service.CandidateService;
 import com.example.demo.models.Candidate;
 import com.example.demo.models.Candidate2;
+import com.example.demo.models.Candidate3;
 import com.example.demo.models.Chart;
 import com.example.demo.models.SkillChart;
 
@@ -28,7 +29,7 @@ public class CandidateController {
 	
 	Logger logger=LoggerFactory.getLogger(CandidateController.class);
 	@RequestMapping(value="/addcandidate",method=RequestMethod.POST)
-	public String addCandidate(@RequestBody Candidate2 candidate) {
+	public String addCandidate(@RequestBody Candidate3 candidate) {
 		//candidateService.addCandidate(new Candidate("Vijaya Prasanna","Shivajee","svprasanna04@gmail.com","bangalore","good","intern",805640128,true,true,false,true,false));
 		System.out.println(candidate.toString());
 		candidateService.addCandidate(candidate);
@@ -38,7 +39,7 @@ public class CandidateController {
 	}
 	
 	@DeleteMapping("/deletecandidate/{id}")
-	public List<Candidate2> deleteCandidate(@PathVariable Integer id){
+	public List<Candidate3> deleteCandidate(@PathVariable Integer id){
 		candidateService.deleteCandidate(id);
 		//System.out.println("Grad with ID: "+id +" deleted");
 		logger.info("Grad with ID: \"+id +\" deleted");
@@ -48,31 +49,31 @@ public class CandidateController {
 	
 	
 	@GetMapping("/getcandidatebyid/{Id}")
-	public Candidate2 getCandidateById(@PathVariable Integer Id) {
+	public Candidate3 getCandidateById(@PathVariable Integer Id) {
 		return candidateService.getCandidateById(Id);
 	}
 	
 	@GetMapping("/getallcandidates")
-	public List<Candidate2> getAllCandidates(){
+	public List<Candidate3> getAllCandidates(){
 		return candidateService.getAllCandidates();
 	}
 	
 	
 	@GetMapping("/getcandidatebylocation/{location}")
-	public List<Candidate2> getCandidateById(@PathVariable String location)
+	public List<Candidate3> getCandidateById(@PathVariable String location)
 	{
 		return candidateService.getCandidateByLocation(location);
 	}
 	
 	
 	@GetMapping("/getcandidatebyjob/{jobdescrip}")
-	public List<Candidate2> getCandidateByJob(@PathVariable String jobdescrip)
+	public List<Candidate3> getCandidateByJob(@PathVariable String jobdescrip)
 	{
 		return candidateService.getCandidateByJob(jobdescrip);
 	}
 	
 	@RequestMapping(method=RequestMethod.PUT,value="/updatecandidate/{Id}")
-	public List<Candidate2> updateCandidate(@RequestBody Candidate2 candidate,@PathVariable Integer Id)
+	public List<Candidate3> updateCandidate(@RequestBody Candidate3 candidate,@PathVariable Integer Id)
 	{
 		candidateService.updateCandidate(candidate,Id);
 		logger.info("Candidate with ID: "+Id+ " got updated");

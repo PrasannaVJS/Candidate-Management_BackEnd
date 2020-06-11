@@ -14,6 +14,7 @@ import com.example.demo.DAO.CandidateDAO;
 import com.example.demo.Service.CandidateService;
 import com.example.demo.models.Candidate;
 import com.example.demo.models.Candidate2;
+import com.example.demo.models.Candidate3;
 import com.example.demo.models.Chart;
 import com.example.demo.models.SkillChart;
 
@@ -24,7 +25,7 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	public String fname="C:\\Users\\lenovo\\Desktop\\My Details\\Accolite\\Logs.log";
 	
-	public void addCandidate(Candidate2 candidate) {
+	public void addCandidate(Candidate3 candidate) {
 		dao.save(candidate);
 		String str=candidate.getFirstname()+" " +candidate.getLastname()+ " is added to database.\n";
 		logFile(fname,str);
@@ -34,28 +35,28 @@ public class CandidateServiceImpl implements CandidateService {
 		String str="Candidate with ID: "+ id+ " is deleted from the database.\n";
 		logFile(fname,str);
 	}
-	public Candidate2 getCandidateById(Integer id) {
-		Optional<Candidate2> optionalEntity = dao.findById(id);
-		Candidate2 candidate=optionalEntity.get();
+	public Candidate3 getCandidateById(Integer id) {
+		Optional<Candidate3> optionalEntity = dao.findById(id);
+		Candidate3 candidate=optionalEntity.get();
 		return candidate;
 	}
-	public List<Candidate2> getAllCandidates() {
+	public List<Candidate3> getAllCandidates() {
 		return dao.getAllCandidates();
 	}
 	
-	public void updateCandidate(Candidate2 candidate,Integer id)
+	public void updateCandidate(Candidate3 candidate,Integer id)
 	{	
 		String str="Candidate with ID: " + candidate.getId() + " got updated.\n";
 		logFile(fname,str);
 		dao.save(candidate);
 	}
 	
-	public List<Candidate2> getCandidateByLocation(String location_choice)
+	public List<Candidate3> getCandidateByLocation(String location_choice)
 	{
 		return dao.getCandidateByLocation(location_choice);
 	}
 	
-	public List<Candidate2> getCandidateByJob(String jobdescrip){
+	public List<Candidate3> getCandidateByJob(String jobdescrip){
 		return dao.getCandidateByJob(jobdescrip);
 	}
 	
@@ -97,19 +98,19 @@ public class CandidateServiceImpl implements CandidateService {
 	public List<SkillChart> getChartDataSkill(){
 		List<SkillChart> sc=new ArrayList<>();
 		int result=dao.getCandidateBySkill("cpp").size();
-		SkillChart s=new SkillChart("cpp",result);
+		SkillChart s=new SkillChart("CPP",result);
 		sc.add(s);
 		result=dao.getCandidateBySkill("java").size();
-		s=new SkillChart("java",result);
+		s=new SkillChart("Java",result);
 		sc.add(s);
 		result=dao.getCandidateBySkill("python").size();
-		s=new SkillChart("python",result);
+		s=new SkillChart("Python",result);
 		sc.add(s);
 		result=dao.getCandidateBySkill("angular").size();
-		s=new SkillChart("angular",result);
+		s=new SkillChart("Angular",result);
 		sc.add(s);
 		result=dao.getCandidateBySkill("spring").size();
-		s=new SkillChart("spring",result);
+		s=new SkillChart("Spring",result);
 		sc.add(s);
 		return sc;
 	}

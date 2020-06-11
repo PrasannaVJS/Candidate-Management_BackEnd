@@ -6,23 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.example.demo.DAO.CandidateDAOCustom;
-import com.example.demo.models.Candidate;
-import com.example.demo.models.Candidate2;
+
+import com.example.demo.models.Candidate3;
 
 public class CandidateDAOImpl implements CandidateDAOCustom {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
-	public List<Candidate2> getAllCandidates(){
+	public List<Candidate3> getAllCandidates(){
 		try {
 		return jdbcTemplate.query(
-				"select * from candidate2",
+				"select * from candidate3",
 				(rs,rowNum) ->
-					new Candidate2(
+					new Candidate3(
 							rs.getInt("id"),
 							rs.getString("firstname"),
 							rs.getString("lastname"),
 							rs.getString("emailID"),
+							rs.getString("institution"),
+							rs.getString("joindate"),
 							rs.getString("location"),
 							rs.getString("feedback"),
 							rs.getString("jobdescrip"),
@@ -41,17 +43,19 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
 		return null;
 	}
 	
-	public List<Candidate2> getCandidateByLocation(String location_choice)
+	public List<Candidate3> getCandidateByLocation(String location_choice)
 	{
 		try {
 		 return jdbcTemplate.query(
-	                "select * from candidate2 where location=?",new Object[]{location_choice},
+	                "select * from candidate3 where location=?",new Object[]{location_choice},
 	                (rs, rowNum) ->
-	                        new Candidate2(
+	                        new Candidate3(
 	                        		rs.getInt("id"),
 	    							rs.getString("firstname"),
 	    							rs.getString("lastname"),
 	    							rs.getString("emailID"),
+	    							rs.getString("institution"),
+	    							rs.getString("joindate"),
 	    							rs.getString("location"),
 	    							rs.getString("feedback"),
 	    							rs.getString("jobdescrip"),
@@ -70,16 +74,18 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
 		return null;
 	}
 	
-	public List<Candidate2> getCandidateByJob(String jobdescrip){
+	public List<Candidate3> getCandidateByJob(String jobdescrip){
 		try {
 		return jdbcTemplate.query(
-                "select * from candidate2 where jobdescrip=?",new Object[]{jobdescrip},
+                "select * from candidate3 where jobdescrip=?",new Object[]{jobdescrip},
                 (rs, rowNum) ->
-                        new Candidate2(
+                        new Candidate3(
                         		rs.getInt("id"),
     							rs.getString("firstname"),
     							rs.getString("lastname"),
     							rs.getString("emailID"),
+    							rs.getString("institution"),
+    							rs.getString("joindate"),
     							rs.getString("location"),
     							rs.getString("feedback"),
     							rs.getString("jobdescrip"),
@@ -98,16 +104,18 @@ public class CandidateDAOImpl implements CandidateDAOCustom {
 		return null;
 	}
 	
-	public List<Candidate2> getCandidateBySkill(String sname){
+	public List<Candidate3> getCandidateBySkill(String sname){
 		try {
 		return jdbcTemplate.query(
-                "select * from candidate2 where "+sname+ "=?",new Object[]{true},
+                "select * from candidate3 where "+sname+ "=?",new Object[]{true},
                 (rs, rowNum) ->
-                        new Candidate2(
+                        new Candidate3(
                         		rs.getInt("id"),
     							rs.getString("firstname"),
     							rs.getString("lastname"),
     							rs.getString("emailID"),
+    							rs.getString("institution"),
+    							rs.getString("joindate"),
     							rs.getString("location"),
     							rs.getString("feedback"),
     							rs.getString("jobdescrip"),
