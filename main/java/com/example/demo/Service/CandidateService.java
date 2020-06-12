@@ -16,6 +16,7 @@ public interface CandidateService {
 	public void updateCandidate(Candidate3 candidate,Integer id);
 	public List<Candidate3> getCandidateByLocation(String location);
 	public List<Candidate3> getCandidateByJob(String jobdescrip);
+	public List<Candidate3> getCandidateBySkill(String skill);
 	public List<Chart> getChartDataLocation();
 	public void logFile(String fname,String str);
 	public List<SkillChart> getChartDataSkill();

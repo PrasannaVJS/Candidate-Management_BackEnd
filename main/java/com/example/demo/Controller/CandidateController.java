@@ -72,6 +72,15 @@ public class CandidateController {
 		return candidateService.getCandidateByJob(jobdescrip);
 	}
 	
+	@GetMapping("/getcandidatebyskill/{skill}")
+	public List<Candidate3> getCandidateBySkill(@PathVariable String skill)
+	{
+		return candidateService.getCandidateBySkill(skill);
+	}
+	
+	
+	
+	
 	@RequestMapping(method=RequestMethod.PUT,value="/updatecandidate/{Id}")
 	public List<Candidate3> updateCandidate(@RequestBody Candidate3 candidate,@PathVariable Integer Id)
 	{

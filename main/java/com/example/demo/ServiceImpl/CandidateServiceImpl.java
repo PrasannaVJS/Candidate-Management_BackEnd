@@ -115,6 +115,8 @@ public class CandidateServiceImpl implements CandidateService {
 		return sc;
 	}
 	
-	
+	public List<Candidate3> getCandidateBySkill(String skill){
+		return dao.getCandidateBySkill(skill);
+	}
 	
 }
