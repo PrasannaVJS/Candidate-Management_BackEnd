@@ -85,7 +85,7 @@ public class CandidateController {
 	public List<Candidate3> updateCandidate(@RequestBody Candidate3 candidate,@PathVariable Integer Id)
 	{
 		candidateService.updateCandidate(candidate,Id);
-		logger.info("Candidate with ID: "+Id+ " got updated");
+		logger.info("Candidate with ID: \"+Id+ \" got updated");
 		return candidateService.getAllCandidates();
 	}
 	
