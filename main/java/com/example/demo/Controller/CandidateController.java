@@ -19,6 +19,7 @@ import com.example.demo.models.Candidate;
 import com.example.demo.models.Candidate2;
 import com.example.demo.models.Candidate3;
 import com.example.demo.models.Chart;
+import com.example.demo.models.DesignationChart;
 import com.example.demo.models.SkillChart;
 
 @RestController
@@ -42,14 +43,14 @@ public class CandidateController {
 	public List<Candidate3> deleteCandidate(@PathVariable Integer id){
 		candidateService.deleteCandidate(id);
 		//System.out.println("Grad with ID: "+id +" deleted");
-		logger.info("Grad with ID: \"+id +\" deleted");
+		logger.info("Candidate with ID: "+id +" deleted");
 		return candidateService.getAllCandidates();
 		
 	}
 	
 	
 	@GetMapping("/getcandidatebyid/{Id}")
-	public Candidate3 getCandidateById(@PathVariable Integer Id) {
+	public List<Candidate3> getCandidateById(@PathVariable Integer Id) {
 		return candidateService.getCandidateById(Id);
 	}
 	
@@ -85,7 +86,7 @@ public class CandidateController {
 	public List<Candidate3> updateCandidate(@RequestBody Candidate3 candidate,@PathVariable Integer Id)
 	{
 		candidateService.updateCandidate(candidate,Id);
-		logger.info("Candidate with ID: \"+Id+ \" got updated");
+		logger.info("Candidate with ID: "+Id+ " got updated");
 		return candidateService.getAllCandidates();
 	}
 	
@@ -99,6 +100,11 @@ public class CandidateController {
 	@GetMapping("/chartskill")
 	public List<SkillChart> getChartDataSkill(){
 		return candidateService.getChartDataSkill();
+	}
+	
+	@GetMapping("/chartdesignation")
+	public List<DesignationChart> getChartDataPosition(){
+		return candidateService.getChartDataPosition();
 	}
 	
 }

@@ -16,6 +16,7 @@ import com.example.demo.models.Candidate;
 import com.example.demo.models.Candidate2;
 import com.example.demo.models.Candidate3;
 import com.example.demo.models.Chart;
+import com.example.demo.models.DesignationChart;
 import com.example.demo.models.SkillChart;
 
 @Component
@@ -30,25 +31,25 @@ public class CandidateServiceImpl implements CandidateService {
 		String str=candidate.getFirstname()+" " +candidate.getLastname()+ " is added to database.\n";
 		logFile(fname,str);
 	}
-	public void deleteCandidate(Integer id) {
+	public boolean deleteCandidate(Integer id) {
 		dao.deleteById(id);
 		String str="Candidate with ID: "+ id+ " is deleted from the database.\n";
 		logFile(fname,str);
+		return true;
 	}
-	public Candidate3 getCandidateById(Integer id) {
-		Optional<Candidate3> optionalEntity = dao.findById(id);
-		Candidate3 candidate=optionalEntity.get();
-		return candidate;
+	public List<Candidate3> getCandidateById(Integer id) {
+		return dao.getCandidateByID(id);
 	}
 	public List<Candidate3> getAllCandidates() {
 		return dao.getAllCandidates();
 	}
 	
-	public void updateCandidate(Candidate3 candidate,Integer id)
+	public boolean updateCandidate(Candidate3 candidate,Integer id)
 	{	
 		String str="Candidate with ID: " + candidate.getId() + " got updated.\n";
 		logFile(fname,str);
 		dao.save(candidate);
+		return true;
 	}
 	
 	public List<Candidate3> getCandidateByLocation(String location_choice)
@@ -117,6 +118,23 @@ public class CandidateServiceImpl implements CandidateService {
 	
 	public List<Candidate3> getCandidateBySkill(String skill){
 		return dao.getCandidateBySkill(skill);
+	}
+	
+	public List<DesignationChart> getChartDataPosition() {
+		List<DesignationChart> dc=new ArrayList<>();
+		int result=dao.getCandidateByJob("Intern").size();
+		DesignationChart d=new DesignationChart("Intern",result);
+		dc.add(d);
+		result=dao.getCandidateByJob("Employee").size();
+		d=new DesignationChart("Employee",result);
+		dc.add(d);
+		result=dao.getCandidateByJob("Manager").size();
+		d=new DesignationChart("Manager",result);
+		dc.add(d);
+		result=dao.getCandidateByJob("HR").size();
+		d=new DesignationChart("HR",result);
+		dc.add(d);
+		return dc;
 	}
 	
 }
